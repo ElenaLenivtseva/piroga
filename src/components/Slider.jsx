@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSliderAsync } from "../features/sliderSlice";
 
-const MenuList = () => {
+const Slider = () => {
   const dispatch = useDispatch();
 
   const slider = useSelector((state) => state.slider.slider);
@@ -21,4 +21,4 @@ const MenuList = () => {
   );
 };
 
-export default MenuList;
+export default Slider;
