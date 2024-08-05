@@ -4,6 +4,7 @@ import ConditionsOfDelivery from "./components/ConditionsOfDelivery";
 import About from "./components/About";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
+import CategoryDetail from "./components/CategoryDetail";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/delivery" element={<ConditionsOfDelivery />} />
           <Route path="/" element={<Home />} />
+          <Route path="/categories/:type" element={<CategoryDetail />} />
           
           {/* <Route path="/account" element={<PageAccount/>} >
                     <Route index element={<PageAccount />} />

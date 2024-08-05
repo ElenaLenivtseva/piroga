@@ -8,6 +8,7 @@ export const getSliderAsync = createAsyncThunk(
 		if (resp.ok) {
 			const data = await resp.json();
             const slider = data[0]
+			// console.log(slider)
 			return { slider };
 		}
 	}
