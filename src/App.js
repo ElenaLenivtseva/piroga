@@ -5,6 +5,7 @@ import About from "./components/About";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
 import CategoryDetail from "./components/CategoryDetail";
+import SingleProduct from "./components/SingleProduct";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Route path="/delivery" element={<ConditionsOfDelivery />} />
           <Route path="/" element={<Home />} />
           <Route path="/categories/:type" element={<CategoryDetail />} />
-          
+          <Route path="/categories/:type/:id" element={<SingleProduct />} />
           {/* <Route path="/account" element={<PageAccount/>} >
                     <Route index element={<PageAccount />} />
                     <Route path=":id" element={<PageAccount />} />
