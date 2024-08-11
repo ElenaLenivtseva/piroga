@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { addToCart, removeFromCart } from "../features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = ({product}) => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  let exist = cart.cart.find((item) => item.id === product.id);
   return (
     <div className='productCard'>
     <Link to={`/categories/${product.category}/${product.id}`}>
@@ -13,7 +18,19 @@ const ProductCard = ({product}) => {
       <p>{product.weight}</p>
       </div>
       </Link>
-      <p>{product.amountInCart>0?'В корзине':'Добавить в корзину'}</p>
+      {exist ? (
+          <div>
+            <button onClick={() => dispatch(removeFromCart(product))}>-</button>
+            <p>{exist.amountInCart}</p>
+            <button onClick={() => dispatch(addToCart(product))}>
+              +
+            </button>
+          </div>
+        ) : (
+          <button onClick={() => dispatch(addToCart(product))}>
+            Добавить в корзину
+          </button>
+        )}
     </div>
   )
 }
