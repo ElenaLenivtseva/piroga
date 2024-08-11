@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, cleanCart } from "../features/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const [delivery, setDelivery] = useState(false);
+  const [change, setChange] = useState(true);
   const cart = useSelector((state) => state.cart);
   console.log(cart);
   return (
@@ -43,6 +45,54 @@ const Cart = () => {
       </div>
       <p>Общая стоимость: {cart.totalPrice}</p>
       <p>Всего товаров: {cart.totalAmount}</p>
+      <div>
+        <h3>Контакты</h3>
+        <label>
+          Номер телефона
+          <input type="tel" name="tel" id="" />
+        </label>
+        <label>
+          Имя
+          <input type="text" />
+        </label>
+      </div>
+      <div>
+        <h3>Способ получения</h3>
+        <div>
+          <div onClick={() => setDelivery(true)}>Доставка курьером</div>
+          <div onClick={() => setDelivery(false)}>Самовывоз</div>
+        </div>
+        <div>{delivery?<div>
+            Адрес доставки
+            <input type="text" />
+        </div>:<p>Наш адрес: пр.Фрунзе 31</p>}</div>
+      </div>
+      <div>
+        <h3>Оплата</h3>
+        <div>
+          <div>
+            Наличными при получении
+            {delivery ? (
+              <div>
+                Надо ли курьеру иметь с собой сдачу?
+                <label>
+                  Да
+                  <input type="radio" name="change" id="" value={change} onChange={()=>setChange(true)}/>
+                </label>
+                <label>
+                  Нет
+                  <input type="radio" name="change" id="" value={change} onChange={()=>setChange(false)}/>
+                </label>
+              </div>
+            ) : null}
+          </div>
+          <div>Картой при получении</div>
+        </div>
+      </div>
+      <div>
+        <h3>Примечания к заказу</h3>
+        <textarea></textarea>
+      </div>
     </div>
   );
 };
