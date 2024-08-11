@@ -2,13 +2,23 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, cleanCart } from "../features/cartSlice";
 
+let initial = {
+  delivery: false,
+  change: 'noChange',
+  time: 'now',
+  date: "",
+  phone: "",
+  name: "",
+  address: "",
+  payment: "cash",
+  note: "",
+};
 const Cart = () => {
   const dispatch = useDispatch();
-  const [delivery, setDelivery] = useState(false);
-  const [change, setChange] = useState(true);
-  const [time, setTime] = useState(true);
+  const [form, setForm] = useState(
+    initial
+  );
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
   return (
     <div>
       <div>
@@ -52,28 +62,47 @@ const Cart = () => {
         </p>
       ) : null}
       <p>Всего товаров: {cart.totalAmount}</p>
+      {/* Done */}
       <div>
         <h3>Контакты</h3>
         <label>
           Номер телефона
-          <input type="tel" name="tel" id="" />
+          <input
+            type="tel"
+            name="tel"
+            id=""
+            value={form.phone}
+            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+          />
         </label>
         <label>
           Имя
-          <input type="text" />
+          <input
+            type="text"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+          />
         </label>
       </div>
+      {/* Done */}
       <div>
         <h3>Способ получения</h3>
         <div>
-          <div onClick={() => setDelivery(true)}>Доставка курьером</div>
-          <div onClick={() => setDelivery(false)}>Самовывоз</div>
+          <div onClick={() => setForm({ ...form, delivery: true })}>
+            Доставка курьером
+          </div>
+          <div onClick={() => setForm({ ...form, delivery: false })}>
+            Самовывоз
+          </div>
         </div>
         <div>
-          {delivery ? (
+          {form.delivery ? (
             <div>
               Адрес доставки
-              <input type="text" />
+              <input
+                type="text"
+                onChange={(e) => setForm({ ...form, address: e.target.value })}
+              />
             </div>
           ) : (
             <p>Наш адрес: пр.Фрунзе 31</p>
@@ -88,28 +117,34 @@ const Cart = () => {
             type="radio"
             name="time"
             id=""
-            value={time}
-            onChange={() => setTime(true)}
+            value='now'
+            checked={form.time==='now'?true:false}
+            onChange={() => setForm({...form, time: true})}
           />
         </label>
         <label>
-          Нет
+          К определенному времени
           <input
             type="radio"
             name="time"
             id=""
-            value={time}
-            onChange={() => setTime(false)}
+            value='later'
+            checked={form.time==='later'?true:false}
+            onChange={(e) => setForm({...form, time: e.target.value})}
           />
         </label>
-        {time?<div>Выберете дату <input type="date"/></div>:null}
+        {form.time === 'later'? (
+          <div>
+            Выберете дату <input type="date" value={form.date} onChange={(e)=>setForm({...form,date:e.target.value})}/>
+          </div>
+        ) : null}
       </div>
       <div>
         <h3>Оплата</h3>
         <div>
-          <div>
+          <div onClick={()=>setForm({...form, payment: 'cash'})}>
             Наличными при получении
-            {delivery ? (
+            {form.delivery &&form.payment==='cash' ? (
               <div>
                 Надо ли курьеру иметь с собой сдачу?
                 <label>
@@ -118,8 +153,9 @@ const Cart = () => {
                     type="radio"
                     name="change"
                     id=""
-                    value={change}
-                    onChange={() => setChange(true)}
+                    value='needChange'
+                    checked={form.change==='needChange'?true:false}
+                    onChange={(e) => setForm({...form, change: e.target.value})}
                   />
                 </label>
                 <label>
@@ -128,20 +164,25 @@ const Cart = () => {
                     type="radio"
                     name="change"
                     id=""
-                    value={change}
-                    onChange={() => setChange(false)}
+                    value='noChange'
+                    checked={form.change==='noChange'?true:false}
+                    onChange={(e) => setForm({...form, change: e.target.value})}
                   />
                 </label>
               </div>
             ) : null}
           </div>
-          <div>Картой при получении</div>
+          <div onClick={()=>setForm({...form, payment: 'card'})}>Картой при получении</div>
         </div>
       </div>
       <div>
         <h3>Примечания к заказу</h3>
-        <textarea></textarea>
+        <textarea
+          value={form.note}
+          onChange={(e) => setForm({ ...form, note: e.target.value })}
+        ></textarea>
       </div>
+      <button onClick={()=>console.log(form)}>Итого</button>
     </div>
   );
 };
