@@ -18,16 +18,21 @@ export const cartSlice = createSlice({
   //   totalPrice: 0,
   // },
   initialState: {
-    amount: 0,
+    cart:[],
+    totalAmount: 0,
+    totalPrice: 0,
   },
   reducers: {
     addToCart(state, action) {
-      console.log(state.amount)
-      state.amount++;
-      console.log(state.amount)
+      const product = action.payload;
+      state.cart.push(product)
+      console.log(state)
+      state.totalAmount++;
+      state.totalPrice+=product.price;
+      console.log(state)
     },
-    renoveFromCart(state, action) {
-      state.amount--;
+    removeFromCart(state, action) {
+      state.totalAmount--;
     },
   },
   extraReducers: (builder) => {

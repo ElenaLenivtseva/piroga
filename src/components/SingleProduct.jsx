@@ -46,10 +46,10 @@ const SingleProduct = () => {
           <p>Углеводы: {singleProduct[0].carbo}</p>
         </div>
         <p>Углеводы: {singleProduct[0].calories}</p>
-        <p>Углеводы: {singleProduct[0].price}</p>
-        <p>Углеводы: {singleProduct[0].weight}</p>
+        <p>Цена: {singleProduct[0].price}</p>
+        <p>Вес: {singleProduct[0].weight}</p>
         {singleProduct[0].amountInCart === '0' ? (
-          <button onClick={()=>dispatch(addToCart(singleProduct))}>Добавить в корзину</button>
+          <button onClick={()=>dispatch(addToCart(singleProduct[0]))}>Добавить в корзину</button>
         ) : (
           <p>В корзине : {singleProduct[0].amountInCart}</p>
         )}
