@@ -7,10 +7,7 @@ export const getCategoriesAsync = createAsyncThunk(
 		const resp = await fetch('https://668160c404acc3545a068660.mockapi.io/api/store/products');
 		if (resp.ok) {
 			const categories = await resp.json();
-			// console.log(categories)
             return {categories}
-            // const slider = data[0]
-			// return { slider };
 		}
 	}
 );

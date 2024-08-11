@@ -2,14 +2,16 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAsync } from "../features/productsSlice";
+import { addToCart } from "../features/cartSlice";
 
 const SingleProduct = () => {
   const params = useParams();
-  console.log(params.id);
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products);
-
+  console.log(products)
+  const cart = useSelector((state) => state.cart);
+  console.log(cart)
   let allCategory = products.filter((elem) => {
     return elem.type === params.type;
   });
@@ -17,7 +19,7 @@ const SingleProduct = () => {
   let singleProduct = allCategory[0].products.filter((elem) => {
     return elem.id === params.id;
   });
-  console.log(singleProduct);
+  
   useEffect(() => {
     dispatch(getCategoriesAsync());
   }, [dispatch]);
@@ -47,7 +49,7 @@ const SingleProduct = () => {
         <p>Углеводы: {singleProduct[0].price}</p>
         <p>Углеводы: {singleProduct[0].weight}</p>
         {singleProduct[0].amountInCart === '0' ? (
-          <button>Добавить в корзину</button>
+          <button onClick={()=>dispatch(addToCart(singleProduct))}>Добавить в корзину</button>
         ) : (
           <p>В корзине : {singleProduct[0].amountInCart}</p>
         )}
