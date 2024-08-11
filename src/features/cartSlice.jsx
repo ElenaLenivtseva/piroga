@@ -13,19 +13,19 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const cartSlice = createSlice({
   name: "cart",
-  // initialState: {
-  //   cart: [],
-  //   totalPrice: 0,
-  // },
+
   initialState: {
     cart: [],
     totalAmount: 0,
     totalPrice: 0,
   },
+
   reducers: {
+
     addToCart(state, action) {
       const productId = action.payload;
       const exist = state.cart.find((product) => product.id === productId.id);
+
       if (exist) {
         exist.amountInCart++;
         exist.totalPrice += productId.price;
@@ -54,9 +54,11 @@ export const cartSlice = createSlice({
         state.totalPrice += productId.price;
       }
     },
+
     removeFromCart(state, action) {
       const productId = action.payload;
       const exist = state.cart.find((product) => product.id === productId.id);
+
       if (exist.amountInCart === 1) {
         state.cart = state.cart.filter(
           (product) => product.id !== productId.id
@@ -70,6 +72,11 @@ export const cartSlice = createSlice({
         state.totalPrice -= productId.price;
       }
     },
+    cleanCart(state,action){
+      state.cart = [];
+      state.totalAmount=0;
+      state.totalPrice=0;
+    }
   },
   extraReducers: (builder) => {
     // builder.addCase(getCategoriesAsync.fulfilled, (state, action) => {
@@ -78,6 +85,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, cleanCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
