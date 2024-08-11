@@ -18,35 +18,57 @@ export const cartSlice = createSlice({
   //   totalPrice: 0,
   // },
   initialState: {
-    cart:[],
+    cart: [],
     totalAmount: 0,
     totalPrice: 0,
   },
   reducers: {
     addToCart(state, action) {
       const productId = action.payload;
-      const exist = state.cart.find(
-        (product) =>
-          product.id === productId.id
-      );
-      if (exist){
-        console.log('есть в корзине')
+      const exist = state.cart.find((product) => product.id === productId.id);
+      if (exist) {
         exist.amountInCart++;
         exist.totalPrice += productId.price;
         state.totalAmount++;
         state.totalPrice += productId.price;
       } else {
-        console.log(productId.amountInCart)
-        state.cart.push(productId)
-        console.log(state)
+        state.cart.push({
+          id: productId.id,
+          category: productId.category,
+          categoryName: productId.categoryName,
+          title: productId.title,
+          img: productId.img,
+          composition: productId.composition,
+          calories: productId.calories,
+          proteins: productId.proteins,
+          fat: productId.fat,
+          carbo: productId.carbo,
+          expiration: productId.expiration,
+          description: productId.description,
+          price: productId.price,
+          totalPrice: productId.totalPrice,
+          weight: productId.weight,
+          amountInCart: 1,
+        });
         state.totalAmount++;
-        state.totalPrice+=productId.price;
-        console.log(state)
+        state.totalPrice += productId.price;
       }
-      
     },
     removeFromCart(state, action) {
-      state.totalAmount--;
+      const productId = action.payload;
+      const exist = state.cart.find((product) => product.id === productId.id);
+      if (exist.amountInCart === 1) {
+        state.cart = state.cart.filter(
+          (product) => product.id !== productId.id
+        );
+        state.totalAmount--;
+        state.totalPrice -= productId.price;
+      } else {
+        exist.amountInCart--;
+        exist.totalPrice -= productId.price;
+        state.totalAmount--;
+        state.totalPrice -= productId.price;
+      }
     },
   },
   extraReducers: (builder) => {

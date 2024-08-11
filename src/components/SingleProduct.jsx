@@ -2,16 +2,15 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAsync } from "../features/productsSlice";
-import { addToCart } from "../features/cartSlice";
+import { addToCart, removeFromCart } from "../features/cartSlice";
 
 const SingleProduct = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products);
-  console.log(products)
   const cart = useSelector((state) => state.cart);
-  console.log(cart)
+
   let allCategory = products.filter((elem) => {
     return elem.type === params.type;
   });
@@ -19,7 +18,9 @@ const SingleProduct = () => {
   let singleProduct = allCategory[0].products.filter((elem) => {
     return elem.id === params.id;
   });
-  
+
+  let exist = cart.cart.find((product) => product.id === singleProduct[0].id);
+
   useEffect(() => {
     dispatch(getCategoriesAsync());
   }, [dispatch]);
@@ -28,7 +29,7 @@ const SingleProduct = () => {
   return (
     <div>
       <div>
-        <img src={singleProduct[0].img} alt={singleProduct[0].title}/>
+        <img src={singleProduct[0].img} alt={singleProduct[0].title} />
       </div>
       <div>
         <p>{singleProduct[0].categoryName}</p>
@@ -48,10 +49,18 @@ const SingleProduct = () => {
         <p>Углеводы: {singleProduct[0].calories}</p>
         <p>Цена: {singleProduct[0].price}</p>
         <p>Вес: {singleProduct[0].weight}</p>
-        {singleProduct[0].amountInCart === '0' ? (
-          <button onClick={()=>dispatch(addToCart(singleProduct[0]))}>Добавить в корзину</button>
+        {exist ? (
+          <div>
+            <button onClick={() => dispatch(removeFromCart(singleProduct[0]))}>-</button>
+            <p>{exist.amountInCart}</p>
+            <button onClick={() => dispatch(addToCart(singleProduct[0]))}>
+              +
+            </button>
+          </div>
         ) : (
-          <p>В корзине : {singleProduct[0].amountInCart}</p>
+          <button onClick={() => dispatch(addToCart(singleProduct[0]))}>
+            Добавить в корзину
+          </button>
         )}
       </div>
     </div>
