@@ -24,12 +24,26 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart(state, action) {
-      const product = action.payload;
-      state.cart.push(product)
-      console.log(state)
-      state.totalAmount++;
-      state.totalPrice+=product.price;
-      console.log(state)
+      const productId = action.payload;
+      const exist = state.cart.find(
+        (product) =>
+          product.id === productId.id
+      );
+      if (exist){
+        console.log('есть в корзине')
+        exist.amountInCart++;
+        exist.totalPrice += productId.price;
+        state.totalAmount++;
+        state.totalPrice += productId.price;
+      } else {
+        console.log(productId.amountInCart)
+        state.cart.push(productId)
+        console.log(state)
+        state.totalAmount++;
+        state.totalPrice+=productId.price;
+        console.log(state)
+      }
+      
     },
     removeFromCart(state, action) {
       state.totalAmount--;
