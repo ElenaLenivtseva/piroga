@@ -182,6 +182,7 @@ const Cart = () => {
           onChange={(e) => setForm({ ...form, note: e.target.value })}
         ></textarea>
       </div>
+      {/* НАДО ЕЩЕ ВАЛИДАЦИЮ ДЕЛАТЬ! */}
       <button onClick={()=>console.log(form)}>Итого</button>
     </div>
   );
