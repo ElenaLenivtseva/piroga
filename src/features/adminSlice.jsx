@@ -7,11 +7,26 @@ export const getOrdersAsync = createAsyncThunk(
 		if (resp.ok) {
 			const data = await resp.json();
             const orders = data[1]
+            console.log(orders)
 			return { orders };
 		}
 	}
 );
-
+export const addOrderAsync = createAsyncThunk(
+	'admin/orders',
+	async (order) => {
+		const resp = await fetch('https://PROJECT_TOKEN.mockapi.io/tasks/orders', {
+            method: 'POST',
+            headers: {'content-type':'application/json'},
+            // Send your data in the request body as JSON
+            body: JSON.stringify(order)
+          })
+            if (resp.ok) {
+                return resp.json();
+            }
+          
+	}
+);
 export const adminSlice = createSlice({
   name: "admin",
 
