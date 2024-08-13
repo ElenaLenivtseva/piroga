@@ -22,6 +22,10 @@ const Cart = () => {
     initial
   );
   const cart = useSelector((state) => state.cart);
+  function handleSubmit(){
+    dispatch(addOrderAsync(form))
+    setForm(initial)
+  }
   return (
     <div>
       <div>
@@ -186,9 +190,8 @@ const Cart = () => {
         ></textarea>
       </div>
       {/* НАДО ЕЩЕ ВАЛИДАЦИЮ ДЕЛАТЬ! */}
-      {/* <button onClick={()=>console.log(form)}>Итого</button> */}
       <button onClick={() =>
-          dispatch(addOrderAsync(form))
+         handleSubmit()
         }>Заказать</button>
     </div>
   );
