@@ -1,17 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const getOrdersAsync = createAsyncThunk("admin/orders", async () => {
+export const getOrdersAsync = createAsyncThunk("orders/getOrders", async () => {
   const resp = await fetch("http://localhost:3001/orders");
-  console.log(resp);
   if (resp.ok) {
     const data = await resp.json();
-    console.log(data);
     return { data };
   }
 });
 
 export const addOrderAsync = createAsyncThunk(
-  "admin/addOrder",
+  "orders/addOrder",
 
   async (order) => {
     const resp = await fetch("http://localhost:3001/orders", {
@@ -21,14 +19,13 @@ export const addOrderAsync = createAsyncThunk(
     });
     if (resp.ok) {
       const data = await resp.json()
-      console.log(data)
       return data;
     }
   }
 );
 
 export const deleteOrderAsync = createAsyncThunk(
-  "admin/deleteOrder",
+  "orders/deleteOrder",
 
   async (orderId) => {
     const resp = await fetch(`http://localhost:3001/orders/${orderId}`, {
@@ -36,13 +33,12 @@ export const deleteOrderAsync = createAsyncThunk(
     });
     if (resp.ok) {
       const data = await resp.json()
-      // console.log(data)
       return data;
     }
   }
 );
-export const adminSlice = createSlice({
-  name: "admin",
+export const ordersSlice = createSlice({
+  name: "orders",
 
   initialState: {
     orders: [],
@@ -52,17 +48,19 @@ export const adminSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getOrdersAsync.fulfilled, (state, action) => {
-        return action.payload.orders;
+        return {...state, orders: action.payload.data};
       })
       .addCase(addOrderAsync.fulfilled, (state, action) => {
-        return action.payload.orders;
+        return {...state, orders: [...state.orders, action.payload]};
       })
       .addCase(deleteOrderAsync.fulfilled, (state, action) => {
-        // return action.payload.orders;
+        const id = action.payload.id;
+        const filtered = state.orders.filter((e) => e.id !== id)
+        return {...state, orders: filtered};
       });
   },
 });
 
 // export const { addToCart, removeFromCart, cleanCart } = cartSlice.actions;
 
-export default adminSlice.reducer;
+export default ordersSlice.reducer;

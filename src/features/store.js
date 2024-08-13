@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sliderReducer from './sliderSlice';
 import productsReducer from './productsSlice';
-import adminReducer from './adminSlice';
+import ordersReducer from './ordersSlice';
 import cartReducer from './cartSlice';
 
 export default configureStore({
@@ -9,6 +9,6 @@ export default configureStore({
 		slider: sliderReducer,
 		products: productsReducer,
 		cart: cartReducer,
-		admin: adminReducer
+		orders: ordersReducer
 	},
 });
