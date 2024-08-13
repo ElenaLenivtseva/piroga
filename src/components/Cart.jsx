@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, cleanCart } from "../features/cartSlice";
+import { addOrderAsync } from "../features/ordersSlice";
+import { nanoid } from "nanoid";
 
 let initial = {
   delivery: false,
@@ -12,6 +14,7 @@ let initial = {
   address: "",
   payment: "cash",
   note: "",
+  id: nanoid()
 };
 const Cart = () => {
   const dispatch = useDispatch();
@@ -183,7 +186,10 @@ const Cart = () => {
         ></textarea>
       </div>
       {/* НАДО ЕЩЕ ВАЛИДАЦИЮ ДЕЛАТЬ! */}
-      <button onClick={()=>console.log(form)}>Итого</button>
+      {/* <button onClick={()=>console.log(form)}>Итого</button> */}
+      <button onClick={() =>
+          dispatch(addOrderAsync(form))
+        }>Заказать</button>
     </div>
   );
 };

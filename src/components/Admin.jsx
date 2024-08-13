@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getOrdersAsync,
   addOrderAsync,
   deleteOrderAsync,
 } from "../features/ordersSlice";
+import Order from "./Order";
 
 const Admin = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Admin = () => {
   }, [dispatch]);
 
   const orders = useSelector((state) => state.orders.orders);
-  // const id = nanoid();
+
   return (
     <div>
       <button
@@ -31,10 +31,7 @@ const Admin = () => {
       <div>
         {orders.map((item) => {
           return (
-            <div id={item.id}>
-              <p>{item.title}</p>
-              <p>{item.id}</p>
-            </div>
+            <Order order={item}/>
           );
         })}
       </div>
