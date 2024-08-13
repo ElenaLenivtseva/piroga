@@ -14,8 +14,9 @@ export const getOrdersAsync = createAsyncThunk(
 );
 export const addOrderAsync = createAsyncThunk(
 	'admin/orders',
+   
 	async (order) => {
-		const resp = await fetch('https://PROJECT_TOKEN.mockapi.io/tasks/orders', {
+		const resp = await fetch('https://668160c404acc3545a068660.mockapi.io/api/store/admin', {
             method: 'POST',
             headers: {'content-type':'application/json'},
             // Send your data in the request body as JSON
