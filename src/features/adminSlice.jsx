@@ -1,47 +1,65 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const getOrdersAsync = createAsyncThunk(
-	'admin/orders',
-	async () => {
-		const resp = await fetch('https://668160c404acc3545a068660.mockapi.io/api/store/admin');
-		if (resp.ok) {
-			const data = await resp.json();
-            const orders = data[1]
-            console.log(orders)
-			return { orders };
-		}
-	}
-);
+export const getOrdersAsync = createAsyncThunk("admin/orders", async () => {
+  const resp = await fetch("http://localhost:3001/orders");
+  console.log(resp);
+  if (resp.ok) {
+    const data = await resp.json();
+    console.log(data);
+    return { data };
+  }
+});
+
 export const addOrderAsync = createAsyncThunk(
-	'admin/orders',
-   
-	async (order) => {
-		const resp = await fetch('https://668160c404acc3545a068660.mockapi.io/api/store/admin', {
-            method: 'POST',
-            headers: {'content-type':'application/json'},
-            // Send your data in the request body as JSON
-            body: JSON.stringify(order)
-          })
-            if (resp.ok) {
-                return resp.json();
-            }
-          
-	}
+  "admin/addOrder",
+
+  async (order) => {
+    const resp = await fetch("http://localhost:3001/orders", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(order),
+    });
+    if (resp.ok) {
+      const data = await resp.json()
+      console.log(data)
+      return data;
+    }
+  }
+);
+
+export const deleteOrderAsync = createAsyncThunk(
+  "admin/deleteOrder",
+
+  async (orderId) => {
+    const resp = await fetch(`http://localhost:3001/orders/${orderId}`, {
+      method: "DELETE",
+    });
+    if (resp.ok) {
+      const data = await resp.json()
+      // console.log(data)
+      return data;
+    }
+  }
 );
 export const adminSlice = createSlice({
   name: "admin",
 
   initialState: {
     orders: [],
-    
   },
 
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getOrdersAsync.fulfilled, (state, action) => {
-      return action.payload.orders;
-    })
+    builder
+      .addCase(getOrdersAsync.fulfilled, (state, action) => {
+        return action.payload.orders;
+      })
+      .addCase(addOrderAsync.fulfilled, (state, action) => {
+        return action.payload.orders;
+      })
+      .addCase(deleteOrderAsync.fulfilled, (state, action) => {
+        // return action.payload.orders;
+      });
   },
 });
 
