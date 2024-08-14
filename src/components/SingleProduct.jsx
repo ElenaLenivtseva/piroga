@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoriesAsync } from "../features/productsSlice";
+import { getProductAsync } from "../features/productsSlice";
 import { addToCart, removeFromCart } from "../features/cartSlice";
 
 const SingleProduct = () => {
@@ -11,24 +11,24 @@ const SingleProduct = () => {
   const products = useSelector((state) => state.products);
   const cart = useSelector((state) => state.cart);
 
-  let allCategory = products.filter((elem) => {
-    return elem.type === params.type;
-  });
+  // let allCategory = products.filter((elem) => {
+  //   return elem.type === params.type;
+  // });
 
-  let singleProduct = allCategory[0].products.filter((elem) => {
-    return elem.id === params.id;
-  });
+  // let singleProduct = allCategory[0].products.filter((elem) => {
+  //   return elem.id === params.id;
+  // });
 
-  let exist = cart.cart.find((product) => product.id === singleProduct[0].id);
+  let exist = cart.cart.find((product) => product.id === params.id);
 
   useEffect(() => {
-    dispatch(getCategoriesAsync());
+    dispatch(getProductAsync(params.id));
   }, [dispatch]);
 
   // получить все-все товары соответсвующей категории, затем по id конкретного продукта, получить все данные о нем - в объекте и отрисовать по нему
   return (
     <div>
-      <div>
+      {/* <div>
         <img src={singleProduct[0].img} alt={singleProduct[0].title} />
       </div>
       <div>
@@ -62,7 +62,7 @@ const SingleProduct = () => {
             Добавить в корзину
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

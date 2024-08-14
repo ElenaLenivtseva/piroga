@@ -1,17 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 
-export const getSliderAsync = createAsyncThunk(
-	'slider/getSliderAsync',
-	async () => {
-		const resp = await fetch('https://668160c404acc3545a068660.mockapi.io/api/store/admin');
-		if (resp.ok) {
-			const data = await resp.json();
-            const slider = data[0]
-			return { slider };
-		}
+export const getSliderAsync = createAsyncThunk("orders/getOrders", async () => {
+	const resp = await fetch("http://localhost:3001/slider");
+	if (resp.ok) {
+	  const slider = await resp.json();
+	  return { slider };
 	}
-);
+  });
 
 
 

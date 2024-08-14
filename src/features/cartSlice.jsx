@@ -1,15 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-// export const getCategoriesAsync = createAsyncThunk(
-// 	'products/getCategoriesAsync',
-// 	async () => {
-// 		const resp = await fetch('https://668160c404acc3545a068660.mockapi.io/api/store/products');
-// 		if (resp.ok) {
-// 			const categories = await resp.json();
-//             return {categories}
-// 		}
-// 	}
-// );
+
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -77,11 +68,6 @@ export const cartSlice = createSlice({
       state.totalAmount=0;
       state.totalPrice=0;
     }
-  },
-  extraReducers: (builder) => {
-    // builder.addCase(getCategoriesAsync.fulfilled, (state, action) => {
-    //   return action.payload.categories;
-    // })
   },
 });
 
