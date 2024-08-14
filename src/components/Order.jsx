@@ -7,6 +7,7 @@ const Order = ({order}) => {
   return (
     <div>
       <h2>Заказ №{order.id}</h2>
+      <p>Заказ создан {order.dateOfOrder}</p>
       <p>Имя клиента {order.name}</p>
       <p>Доставка {order.delivery?'нужна':'не нужна. Самовывоз'}</p>
       <p>Адрес {order.address?order.address:' - '}</p>

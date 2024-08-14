@@ -1,40 +1,16 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getOrdersAsync,
-  addOrderAsync,
-  deleteOrderAsync,
-} from "../features/ordersSlice";
-import Order from "./Order";
+import React, { useState } from "react";
+import AllOrders from "./AllOrders";
+import Products from "./Products";
 
 const Admin = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getOrdersAsync());
-  }, [dispatch]);
-
-  const orders = useSelector((state) => state.orders.orders);
-
+  const [status, setStatus] = useState("orders");
   return (
     <div>
-      <button
-        onClick={() =>
-          dispatch(addOrderAsync({ title: "test2", id: "123" }))
-        }
-      >
-        Имитация добавления заказа
-      </button>
-      <button onClick={() => dispatch(deleteOrderAsync("123"))}>
-        Удалить заказ
-      </button>
       <div>
-        {orders.map((item) => {
-          return (
-            <Order order={item}/>
-          );
-        })}
+        <p onClick={() => setStatus("orders")}>Заказы</p>
+        <p onClick={() => setStatus("products")}>Товары</p>
       </div>
+      <div>{status === "orders" ? <AllOrders /> : <Products />}</div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { addToCart, removeFromCart, cleanCart } from "../features/cartSlice";
 import { addOrderAsync } from "../features/ordersSlice";
 import { nanoid } from "nanoid";
 
-let initial = {
+const initial = {
   delivery: false,
   change: 'noChange',
   time: 'now',
@@ -14,14 +14,27 @@ let initial = {
   address: "",
   payment: "cash",
   note: "",
-  id: nanoid()
+  id: nanoid(),
+  dateOfOrder: dateString()
 };
+function dateString(){
+  const date = new Date()
+  const months=['Янв', 'Фев', 'Март','Апр','Май','Июнь','Июль','Авг','Сент','Окт','Нояб','Дек']
+  const yearOforder = date.getFullYear()
+  const numberMonth = date.getMonth()
+  const monthOforder = months[numberMonth]
+  const dayOfOrder = date.getDate()
+  const hourOfOrder = date.getHours()
+  const minutesOfOrder = date.getMinutes()
+  return `Заказ сделан в ${hourOfOrder}:${minutesOfOrder} ${dayOfOrder} ${monthOforder} ${yearOforder}`
+}
 const Cart = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState(
     initial
   );
   const cart = useSelector((state) => state.cart);
+ 
   function handleSubmit(){
     dispatch(addOrderAsync(form))
     setForm(initial)
