@@ -5,8 +5,8 @@ import { getSliderAsync } from "../features/sliderSlice";
 const Slider = () => {
   const dispatch = useDispatch();
 
-  const slider = useSelector((state) => state.slider.slider);
-
+  const slider = useSelector((state) => state.slider);
+  console.log(slider)
   useEffect(() => {
     dispatch(getSliderAsync());
   }, [dispatch]);
@@ -14,7 +14,7 @@ const Slider = () => {
     <div className="App">
       {slider
         ? slider.map((item) => {
-            return <img src={item} alt="" />;
+            return <img src={item.url} alt={item.alt} />;
           })
         : ""}
     </div>
