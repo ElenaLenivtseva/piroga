@@ -7,19 +7,20 @@ const Categories = () => {
   const dispatch = useDispatch();
 
 
-  // const products = useSelector((state) => state.products);
-  // console.log(products)
-  // useEffect(() => {
-  //   dispatch(getCategoriesAsync());
-  // }, [dispatch]);
+  const categories = useSelector((state) => state.products.categories);
+  console.log('products',categories)
+
+  useEffect(() => {
+    dispatch(getCategoriesAsync());
+  }, [dispatch]);
   return (
     <div className="categories">
-      {/* {products
-        ? products.map((item) => {
+      {categories
+        ? categories.map((item) => {
             return <CategCard item={item} key={item.type}/>
              
           })
-        : ""} */}
+        : null}
     </div>
   );
 };

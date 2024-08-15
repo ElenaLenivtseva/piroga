@@ -7,9 +7,8 @@ const CategCard = ({ item }) => {
     <div className="categCard">
       <Link to={`/categories/${item.type}`}>
         <div>
-          <img src={item.mainImage} alt={item.title} />
+          <img src={item.mainImg} alt={item.title} />
           <h4>{item.title}</h4>
-          <p>{item.products.length} блюда</p>
         </div>
       </Link>
     </div>

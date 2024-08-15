@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductAsync } from "../features/productsSlice";
-import { addToCart, removeFromCart } from "../features/cartSlice";
+// import React, { useEffect } from "react";
+// import { useParams } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getProductAsync } from "../features/productsSlice";
+// import { addToCart, removeFromCart } from "../features/cartSlice";
 
 const SingleProduct = () => {
-  const params = useParams();
-  const dispatch = useDispatch();
+  // const params = useParams();
+  // const dispatch = useDispatch();
 
-  const products = useSelector((state) => state.products);
-  const cart = useSelector((state) => state.cart);
+  // const products = useSelector((state) => state.products);
+  // const cart = useSelector((state) => state.cart);
 
   // let allCategory = products.filter((elem) => {
   //   return elem.type === params.type;
@@ -19,11 +19,11 @@ const SingleProduct = () => {
   //   return elem.id === params.id;
   // });
 
-  let exist = cart.cart.find((product) => product.id === params.id);
+  // let exist = cart.cart.find((product) => product.id === params.id);
 
-  useEffect(() => {
-    dispatch(getProductAsync(params.id));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getProductAsync(params.id));
+  // }, [dispatch]);
 
   // получить все-все товары соответсвующей категории, затем по id конкретного продукта, получить все данные о нем - в объекте и отрисовать по нему
   return (

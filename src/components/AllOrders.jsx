@@ -17,11 +17,11 @@ const AllOrders = () => {
   return (
     <div>
       <div>
-        {orders.map((item) => {
+        {orders?orders.map((item) => {
           return (
             <Order order={item}/>
           );
-        })}
+        }):null}
       </div>
     </div>
   );

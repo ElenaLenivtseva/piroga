@@ -301,5 +301,17 @@
       "note": "",
       "dateOfOrder": ""
     }
+  ],
+  "categories": [
+    {
+      "type": "cheesecakes",
+      "title": "Чизкейки",
+      "mainImg": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/media/photo/2202626/79cbb4e5-ef96-42cd-ac58-26923a8a9143.webp"
+    },
+    {
+      "type": "cakes",
+      "title": "Десерты и пирожные",
+      "mainImg": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/media/photo/2202706/c855ee17-8ba3-4b11-af76-10a281443a19.webp"
+    }
   ]
 }
