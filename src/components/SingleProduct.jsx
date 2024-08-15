@@ -9,8 +9,6 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
 
   const product = useSelector((state) => state.products.selectedProduct);
-  const arr = product.composition
-  console.log(arr )
   const cart = useSelector((state) => state.cart);
   const exist = cart.cart.find((product) => product.id === params.id);
   
@@ -22,7 +20,6 @@ const SingleProduct = () => {
     };
   }, [dispatch, params.id]);
 
-  // получить все-все товары соответсвующей категории, затем по id конкретного продукта, получить все данные о нем - в объекте и отрисовать по нему
   return (
     <>
       {product?<div>

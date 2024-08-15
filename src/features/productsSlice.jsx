@@ -26,37 +26,50 @@ export const getProductAsync = createAsyncThunk(
     const resp = await fetch(`http://localhost:3001/products/${id}`);
     if (resp.ok) {
       const product = await resp.json();
-      return  product ;
+      return product;
+    }
+  }
+);
+export const getAllProductsAsync = createAsyncThunk(
+  "products/getAllProductAsync",
+  async () => {
+    const resp = await fetch(`http://localhost:3001/products`);
+    if (resp.ok) {
+      const products = await resp.json();
+      return products;
     }
   }
 );
 
-// export const fetchAsyncCategDetail = createAsyncThunk(
-// 	"products/fetchAsyncCategDetail",
-// 	async (id) => {
-// 		const resp = await fetch(`https://668160c404acc3545a068660.mockapi.io/api/store/products`);
-// 		if (resp.ok) {
-// 			const categories = await resp.json();
-//             return {categories}
-//             // const slider = data[0]
-// 			// return { slider };
-// 		}
-// 	  const response = await movieApi.get(`?apiKey=${ApiKey}&i=${id}&Plot=full`);
+export const deleteProductAsync = createAsyncThunk(
+  "products/deleteProduct",
 
-// 	  return response.data;
-// 	}
-//   );
+  async (productId) => {
+    const resp = await fetch(`http://localhost:3001/products/${productId}`, {
+      method: "DELETE",
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      return data;
+    }
+  }
+);
 
 export const productsSlice = createSlice({
   name: "products",
-  initialState: { categories: [], selectedProduct: {}, filteredByCategory: [] },
+  initialState: {
+    categories: [],
+    selectedProduct: {},
+    filteredByCategory: [],
+    allProducts: [],
+  },
 
   reducers: {
     removeSelectedProduct: (state) => {
-        state.selectedProduct = {};
+      state.selectedProduct = {};
     },
     removeFilteredCategory: (state) => {
-        state.filteredByCategory = [];
+      state.filteredByCategory = [];
     },
   },
   extraReducers: (builder) => {
@@ -68,11 +81,19 @@ export const productsSlice = createSlice({
         return { ...state, filteredByCategory: action.payload };
       })
       .addCase(getProductAsync.fulfilled, (state, action) => {
-        return {...state, selectedProduct: action.payload };
+        return { ...state, selectedProduct: action.payload };
+      })
+      .addCase(getAllProductsAsync.fulfilled, (state, action) => {
+        return { ...state, allProducts: action.payload };
+      })
+      .addCase(deleteProductAsync.fulfilled, (state, action) => {
+        const id = action.payload.id;
+        const filtered = state.allProducts.filter((e) => e.id !== id);
+        return { ...state, allProducts: filtered };
       });
   },
 });
 
-
-export const { removeSelectedProduct, removeFilteredCategory } = productsSlice.actions;
+export const { removeSelectedProduct, removeFilteredCategory } =
+  productsSlice.actions;
 export default productsSlice.reducer;

@@ -2,54 +2,31 @@
   "slider": [
     {
       "url": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/special/photo/2712/%D0%91%D0%B0%D0%BD%D0%BD%D0%B5%D1%80.webp",
-      "alt": "Баннер"
+      "alt": "Баннер",
+      "id": "b2c4"
     },
     {
       "url": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/special/photo/1545/%D0%BA%D0%B0%D1%84%D0%B5-%D0%BF%D0%B5%D0%BA%D0%B0%D1%80%D0%BD%D1%8F_%D0%BF%D0%B8%D1%80%D0%BE%D0%B3%D0%B0__%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F___%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F_3.webp",
-      "alt": "Баннер"
+      "alt": "Баннер",
+      "id": "beb3"
     },
     {
       "url": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/special/photo/1547/%D0%BA%D0%B0%D1%84%D0%B5-%D0%BF%D0%B5%D0%BA%D0%B0%D1%80%D0%BD%D1%8F_%D0%BF%D0%B8%D1%80%D0%BE%D0%B3%D0%B0__%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.webp",
-      "alt": "Баннер"
+      "alt": "Баннер",
+      "id": "71da"
     },
     {
       "url": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/special/photo/1546/%D0%BA%D0%B0%D1%84%D0%B5-%D0%BF%D0%B5%D0%BA%D0%B0%D1%80%D0%BD%D1%8F_%D0%BF%D0%B8%D1%80%D0%BE%D0%B3%D0%B0__%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F__%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.webp",
-      "alt": "Баннер"
+      "alt": "Баннер",
+      "id": "e2d0"
     },
     {
       "url": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/special/photo/1691/%D0%BA%D0%B0%D1%84%D0%B5-%D0%BF%D0%B5%D0%BA%D0%B0%D1%80%D0%BD%D1%8F_%D0%BF%D0%B8%D1%80%D0%BE%D0%B3%D0%B0__%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.webp",
-      "alt": "Баннер"
+      "alt": "Баннер",
+      "id": "eecc"
     }
   ],
   "products": [
-    {
-      "id": "01",
-      "category": "cheesecakes",
-      "categoryName": "Чизкейки",
-      "title": "Чизкейк Клубничный",
-      "img": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/media/photo/2202628/8845742b-f421-423f-9116-05bbad4a63bd.webp",
-      "composition": [
-        "мука в/с",
-        "соль",
-        "сахар",
-        "яйцо куриное",
-        "масло сливочное",
-        "сыр творожный",
-        "сметана",
-        "желе",
-        "клубника"
-      ],
-      "calories": 251,
-      "proteins": 5.3,
-      "fat": 13.1,
-      "carbo": 27.4,
-      "expiration": 72,
-      "description": "Вес готового торта 1,4 кг ± 100 гр. <br/> Сливочно-сырный мусс на песочной основе с клубничным соусом.",
-      "price": 900,
-      "totalPrice": 900,
-      "weight": "1 кг",
-      "amountInCart": 0
-    },
     {
       "id": "02",
       "category": "cheesecakes",
@@ -104,31 +81,6 @@
       "price": 800,
       "totalPrice": 800,
       "weight": "1 кг",
-      "amountInCart": 0
-    },
-    {
-      "id": "12",
-      "category": "cakes",
-      "categoryName": "Пирожные и десерты",
-      "title": "Эклер ванильный",
-      "img": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/media/photo/2202705/3c75918a-522c-438c-9281-e72b709cc10b.webp",
-      "composition": [
-        "мука в/с",
-        "соль",
-        "сахар",
-        "яйцо куриное",
-        "масло сливочное",
-        "молоко"
-      ],
-      "calories": 243,
-      "proteins": 4.9,
-      "fat": 3.5,
-      "carbo": 23.9,
-      "expiration": 72,
-      "description": "Французский десерт из заварного теста с авторским ванильным кремом.",
-      "price": 90,
-      "totalPrice": 90,
-      "weight": "101 г",
       "amountInCart": 0
     }
   ],
@@ -306,12 +258,14 @@
     {
       "type": "cheesecakes",
       "title": "Чизкейки",
-      "mainImg": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/media/photo/2202626/79cbb4e5-ef96-42cd-ac58-26923a8a9143.webp"
+      "mainImg": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/media/photo/2202626/79cbb4e5-ef96-42cd-ac58-26923a8a9143.webp",
+      "id": "8250"
     },
     {
       "type": "cakes",
       "title": "Десерты и пирожные",
-      "mainImg": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/media/photo/2202706/c855ee17-8ba3-4b11-af76-10a281443a19.webp"
+      "mainImg": "https://53a7276f-d68f-462e-a2bf-df223e005be4.selstorage.ru/uploads/media/photo/2202706/c855ee17-8ba3-4b11-af76-10a281443a19.webp",
+      "id": "ca0d"
     }
   ]
 }

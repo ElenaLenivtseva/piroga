@@ -9,6 +9,7 @@ const Categories = () => {
 
   useEffect(() => {
     dispatch(getCategoriesAsync());
+    
   }, [dispatch]);
 
   return (
