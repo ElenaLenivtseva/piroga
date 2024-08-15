@@ -6,30 +6,30 @@ export const getCategoriesAsync = createAsyncThunk(
     const resp = await fetch("http://localhost:3001/categories");
     if (resp.ok) {
       const categories = await resp.json();
-      return  categories;
+      return categories;
     }
   }
 );
 export const getFilteredProductsAsync = createAsyncThunk(
-    "products/getFilteredProducts",
-    async (type) => {
-      const resp = await fetch(`http://localhost:3001/products?category=${type}`);
-      if (resp.ok) {
-        const filteredProducts = await resp.json();
-        return filteredProducts;
-      }
+  "products/getFilteredProducts",
+  async (type) => {
+    const resp = await fetch(`http://localhost:3001/products?category=${type}`);
+    if (resp.ok) {
+      const filteredProducts = await resp.json();
+      return filteredProducts;
     }
-  );
-// export const getProductAsync = createAsyncThunk(
-//   "products/getProductAsync",
-//   async (id) => {
-//     const resp = await fetch(`http://localhost:3001/products/${id}`);
-//     if (resp.ok) {
-//       const product = await resp.json();
-//       return { product };
-//     }
-//   }
-// );
+  }
+);
+export const getProductAsync = createAsyncThunk(
+  "products/getProductAsync",
+  async (id) => {
+    const resp = await fetch(`http://localhost:3001/products/${id}`);
+    if (resp.ok) {
+      const product = await resp.json();
+      return  product ;
+    }
+  }
+);
 
 // export const fetchAsyncCategDetail = createAsyncThunk(
 // 	"products/fetchAsyncCategDetail",
@@ -49,21 +49,30 @@ export const getFilteredProductsAsync = createAsyncThunk(
 
 export const productsSlice = createSlice({
   name: "products",
-  initialState: { categories: [], selectedProduct: {}, filteredByCategory:[] },
+  initialState: { categories: [], selectedProduct: {}, filteredByCategory: [] },
 
-  reducers: {},
+  reducers: {
+    removeSelectedProduct: (state) => {
+        state.selectedProduct = {};
+    },
+    removeFilteredCategory: (state) => {
+        state.filteredByCategory = [];
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(getCategoriesAsync.fulfilled, (state, action) => {
-      return { ...state, categories: action.payload };
-    }).addCase(getFilteredProductsAsync.fulfilled, (state, action) => {
+    builder
+      .addCase(getCategoriesAsync.fulfilled, (state, action) => {
+        return { ...state, categories: action.payload };
+      })
+      .addCase(getFilteredProductsAsync.fulfilled, (state, action) => {
         return { ...state, filteredByCategory: action.payload };
+      })
+      .addCase(getProductAsync.fulfilled, (state, action) => {
+        return {...state, selectedProduct: action.payload };
       });
-    //   .addCase(getProductAsync.fulfilled, (state, action) => {
-    //     return { ...state, selectedProduct: action.payload };
-    //   });
   },
 });
 
-// export const { addTodo, toggleComplete, deleteTodo } = todoSlice.actions;
 
+export const { removeSelectedProduct, removeFilteredCategory } = productsSlice.actions;
 export default productsSlice.reducer;

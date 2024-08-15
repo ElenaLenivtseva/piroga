@@ -5,20 +5,17 @@ import CategCard from "./CategCard";
 
 const Categories = () => {
   const dispatch = useDispatch();
-
-
   const categories = useSelector((state) => state.products.categories);
-  console.log('products',categories)
 
   useEffect(() => {
     dispatch(getCategoriesAsync());
   }, [dispatch]);
+
   return (
     <div className="categories">
       {categories
         ? categories.map((item) => {
             return <CategCard item={item} key={item.type}/>
-             
           })
         : null}
     </div>
