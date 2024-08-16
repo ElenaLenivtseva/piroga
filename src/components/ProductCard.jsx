@@ -14,8 +14,8 @@ const ProductCard = ({product}) => {
       <div>
       <h3>{product.title}</h3>
       <p>{product.description}</p>
-      <p>{product.price}</p>
-      <p>{product.weight}</p>
+      <p>{`${product.price} руб`}</p>
+      <p>{`${product.weight} кг`}</p>
       </div>
       </Link>
       {exist ? (

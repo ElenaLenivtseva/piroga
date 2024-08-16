@@ -42,8 +42,8 @@ const SingleProduct = () => {
           <p>Углеводы: {product.carbo}</p>
         </div>
         <p>Углеводы: {product.calories}</p>
-        <p>Цена: {product.price}</p>
-        <p>Вес: {product.weight}</p>
+        <p>{`Цена: ${product.price}`}</p>
+        <p>{`Вес: ${product.weight}`}</p>
         {exist ? (
           <div>
             <button onClick={() => dispatch(removeFromCart(product))}>-</button>

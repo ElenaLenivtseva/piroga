@@ -51,7 +51,7 @@ export const ordersSlice = createSlice({
         return {...state, orders: action.payload.data};
       })
       .addCase(addOrderAsync.fulfilled, (state, action) => {
-        return {...state, orders: [...state.orders, action.payload]};
+        return {...state, orders: [state.orders, action.payload]};
       })
       .addCase(deleteOrderAsync.fulfilled, (state, action) => {
         const id = action.payload.id;

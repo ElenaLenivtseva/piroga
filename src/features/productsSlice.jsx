@@ -41,6 +41,22 @@ export const getAllProductsAsync = createAsyncThunk(
   }
 );
 
+export const addProductAsync = createAsyncThunk(
+  "products/addProduct",
+
+  async (product) => {
+    const resp = await fetch("http://localhost:3001/products", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(product),
+    });
+    if (resp.ok) {
+      const data = await resp.json()
+      return data;
+    }
+  }
+);
+
 export const deleteProductAsync = createAsyncThunk(
   "products/deleteProduct",
 
@@ -85,6 +101,8 @@ export const productsSlice = createSlice({
       })
       .addCase(getAllProductsAsync.fulfilled, (state, action) => {
         return { ...state, allProducts: action.payload };
+      }).addCase(addProductAsync.fulfilled, (state, action) => {
+        return {...state, allProducts: [...state.allProducts, action.payload]};
       })
       .addCase(deleteProductAsync.fulfilled, (state, action) => {
         const id = action.payload.id;
