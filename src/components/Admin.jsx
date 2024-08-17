@@ -4,7 +4,7 @@ import AllProducts from "./AllProducts";
 import AdminCategories from "./AdminCategories";
 
 const Admin = () => {
-  const [status, setStatus] = useState("orders");
+  const [status, setStatus] = useState("categories");
   return (
     <div>
       <div>

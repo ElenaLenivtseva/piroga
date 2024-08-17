@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getCategoriesAsync = createAsyncThunk(
-  "orders/getCategories",
+  "categories/getCategories",
   async () => {
     const resp = await fetch("http://localhost:3001/categories");
     if (resp.ok) {
@@ -12,7 +12,7 @@ export const getCategoriesAsync = createAsyncThunk(
 );
 
 export const addCategoryAsync = createAsyncThunk(
-  "orders/addCategory",
+  "categories/addCategory",
 
   async (category) => {
     const resp = await fetch("http://localhost:3001/categories", {
@@ -27,8 +27,8 @@ export const addCategoryAsync = createAsyncThunk(
   }
 );
 
-export const deleteCategoryAsync = createAsyncThunk(
-  "orders/deleteCategory",
+export const deleteCategoryTextAsync = createAsyncThunk(
+  "categories/deleteCategoryText",
 
   async (categoryId) => {
     const resp = await fetch(`http://localhost:3001/categories/${categoryId}`, {
@@ -40,6 +40,9 @@ export const deleteCategoryAsync = createAsyncThunk(
     }
   }
 );
+
+  
+
 export const categoriesSlice = createSlice({
   name: "categories",
 
@@ -54,11 +57,13 @@ export const categoriesSlice = createSlice({
       .addCase(addCategoryAsync.fulfilled, (state, action) => {
         return [...state, action.payload];
       })
-      .addCase(deleteCategoryAsync.fulfilled, (state, action) => {
+      .addCase(deleteCategoryTextAsync.fulfilled, (state, action) => {
         const id = action.payload.id;
         const filtered = state.filter((e) => e.id !== id);
         return filtered;
-      });
+        // ПЕРЕНЕСТИ В ПРОДУКТЫ, ПОТОМУ ЧТО НЕ ДОБЕРУСЬ ДО СТЕЙТА
+      })
+    
   },
 });
 

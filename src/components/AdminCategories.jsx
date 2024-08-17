@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     addCategoryAsync,
-  deleteCategoryAsync,
+    deleteCategoryTextAsync,
   getCategoriesAsync,
 } from "../features/categoriesSlice";
+import {deleteProductsOfCategoryAsync} from '../features/productsSlice'
 
 const initialForm = {
   type: "",
@@ -74,15 +75,14 @@ const AdminCategories = () => {
               </p>
               <p>
                 <b>
-                  Предупреждение: вы удаляете только название категории. Оно не
-                  будет в списке предложенных при создании нового товара. Товары
-                  данной категории сохраняются. Чтобы удалить товары перейдите в
-                  раздел товары.
+                  Предупреждение: вы удаляете не только название категории, но и все товары, относящиеся к ней. Названия категории не
+                  будет в списке предложенных при создании нового товара. 
                 </b>
               </p>
               <button
                 onClick={() => {
-                  dispatch(deleteCategoryAsync(item.id));
+                  dispatch(deleteCategoryTextAsync(item.id));
+                  dispatch(deleteProductsOfCategoryAsync(item.type));
                 }}
               >
                 Удалить категорию

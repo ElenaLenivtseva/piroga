@@ -4,6 +4,7 @@ import {
   getAllProductsAsync,
   addProductAsync,
 } from "../features/productsSlice";
+import {getCategoriesAsync} from '../features/categoriesSlice'
 import ProductAdmin from "./ProductAdmin";
 
 const initialProduct = {
@@ -44,6 +45,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     dispatch(getAllProductsAsync());
+    dispatch(getCategoriesAsync());
   }, [dispatch]);
 
   const allProducts = useSelector((state) => state.products.allProducts);
