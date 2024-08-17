@@ -105,6 +105,41 @@
       "totalPrice": 0,
       "weight": "0.4",
       "amountInCart": 0
+    },
+    {
+      "id": "82a9",
+      "category": "pirogi",
+      "title": "лабуда",
+      "img": "",
+      "composition": [],
+      "calories": 0,
+      "proteins": 0,
+      "fat": 0,
+      "carbo": 0,
+      "expiration": 0,
+      "description": "",
+      "price": 0,
+      "totalPrice": 0,
+      "weight": 0,
+      "amountInCart": 0
+    },
+    {
+      "id": "44e1",
+      "category": "cakes",
+      "categoryName": "Десерты и пирожные",
+      "title": "с меренгой",
+      "img": "",
+      "composition": [],
+      "calories": 0,
+      "proteins": 0,
+      "fat": 0,
+      "carbo": 0,
+      "expiration": 0,
+      "description": "",
+      "price": 0,
+      "totalPrice": 0,
+      "weight": 0,
+      "amountInCart": 0
     }
   ],
   "orders": [

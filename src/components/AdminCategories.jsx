@@ -35,16 +35,6 @@ const AdminCategories = () => {
     setAdd(false)
 }
 
-  
-  function checkType(e){
-    for(let category of categories)
-        if(e.target.value===category.type){
-            alert('Данная категория уже существует')
-        } else {
-            
-        }
-   
-  }
   return (
     <div>
       <h2>Все категории</h2>

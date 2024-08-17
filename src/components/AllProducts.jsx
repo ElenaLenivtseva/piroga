@@ -24,18 +24,56 @@ const initialProduct = {
   amountInCart: 0,
 };
 
+function makeObjOfArrs(keys, values) {
+  let obj = {};
+
+  for (let i = 0; i <= 4; i++) {
+    let key = keys[i];
+    let value = values[i];
+
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
 const AllProducts = () => {
   const dispatch = useDispatch();
   const [add, setAdd] = useState(false);
   const [form, setForm] = useState(initialProduct);
-  function handleChangeComposition(str) {
-    setForm({ ...form, composition: str.split(",") });
-  }
+
   useEffect(() => {
     dispatch(getAllProductsAsync());
   }, [dispatch]);
 
   const allProducts = useSelector((state) => state.products.allProducts);
+  const categories = useSelector((state) => state.categories);
+
+  function handleChangeComposition(str) {
+    setForm({ ...form, composition: str.split(",") });
+  }
+  function handleAddProduct(e) {
+    e.preventDefault();
+    dispatch(addProductAsync(form));
+    setForm(initialProduct);
+    setAdd(false);
+  }
+
+  // Создание объекта из двух массивов(тип категории и название). Чтобы при выборе типа категории менялось и имя в объекте продукта
+  let categoriesTypes = [];
+  let categoriesNames = [];
+
+  for (let i = 0; i < categories.length; i++) {
+    categoriesTypes.push(categories[i].type);
+    categoriesNames.push(categories[i].title);
+  }
+  const categoryDetailObj = makeObjOfArrs(categoriesTypes, categoriesNames);
+
+  function handleSelectChange(e) {
+    const categoryType = e.target.value;
+    const categoryName = categoryDetailObj[categoryType];
+    setForm({ ...form, category: categoryType, categoryName: categoryName });
+  }
 
   return (
     <div>
@@ -43,28 +81,21 @@ const AllProducts = () => {
       {add ? (
         <div>
           <p onClick={() => setAdd(false)}>X</p>
+          <button onClick={() => setForm(initialProduct)}>
+            Очистить форму
+          </button>
           <form>
             <label>
-              Категория EN
-              <input
-                type="text"
-                placeholder="Pirogi"
-                onChange={(e) => {
-                  setForm({ ...form, category: e.target.value });
-                }}
-                value={form.category}
-              />
-            </label>
-            <label>
-              Категория RU
-              <input
-                type="text"
-                placeholder="Пироги"
-                onChange={(e) => {
-                  setForm({ ...form, categoryName: e.target.value });
-                }}
-                value={form.categoryName}
-              />
+              Категория
+              <select onChange={handleSelectChange}>
+                {categoriesTypes.map((item, index) => {
+                  return (
+                    <option value={item} key={index}>
+                      {item}
+                    </option>
+                  );
+                })}
+              </select>
             </label>
             <label>
               Название товара
@@ -176,17 +207,7 @@ const AllProducts = () => {
               />
             </label>
 
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setForm(form);
-                dispatch(addProductAsync(form));
-                setForm(initialProduct);
-                setAdd(false);
-              }}
-            >
-              Добавить товар
-            </button>
+            <button onClick={handleAddProduct}>Добавить товар</button>
           </form>
         </div>
       ) : null}
