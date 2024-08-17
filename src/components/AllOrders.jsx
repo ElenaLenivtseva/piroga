@@ -12,7 +12,7 @@ const AllOrders = () => {
     dispatch(getOrdersAsync());
   }, [dispatch]);
 
-  const orders = useSelector((state) => state.orders.orders);
+  const orders = useSelector((state) => state.orders);
 
   return (
     <div>

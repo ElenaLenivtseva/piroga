@@ -21,7 +21,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/categories/:type" element={<CategoryDetail />} />
-          <Route path="/categories/:type/:id" element={<SingleProduct />} />
+          <Route path="/:id" element={<SingleProduct />} />
           {/* <Route path="/account" element={<PageAccount/>} >
                     <Route index element={<PageAccount />} />
                     <Route path=":id" element={<PageAccount />} />

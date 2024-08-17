@@ -40,23 +40,21 @@ export const deleteOrderAsync = createAsyncThunk(
 export const ordersSlice = createSlice({
   name: "orders",
 
-  initialState: {
-    orders: [],
-  },
+  initialState: [],
 
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getOrdersAsync.fulfilled, (state, action) => {
-        return {...state, orders: action.payload.data};
+        return action.payload.data;
       })
       .addCase(addOrderAsync.fulfilled, (state, action) => {
-        return {...state, orders: [state.orders, action.payload]};
+        return [...state, action.payload];
       })
       .addCase(deleteOrderAsync.fulfilled, (state, action) => {
         const id = action.payload.id;
-        const filtered = state.orders.filter((e) => e.id !== id)
-        return {...state, orders: filtered};
+        const filtered = state.filter((e) => e.id !== id)
+        return filtered;
       });
   },
 });

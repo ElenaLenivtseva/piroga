@@ -9,7 +9,7 @@ const ProductCard = ({product}) => {
   let exist = cart.cart.find((item) => item.id === product.id);
   return (
     <div className='productCard'>
-    <Link to={`/categories/${product.category}/${product.id}`}>
+    <Link to={`/${product.id}`}>
       <img src={product.img} alt={product.title}/>
       <div>
       <h3>{product.title}</h3>
