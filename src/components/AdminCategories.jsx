@@ -64,7 +64,7 @@ const AdminCategories = () => {
               <h4>Название RU: {item.title}</h4>
               <p>
                 Путь на основное изображение: <br />
-                <a href={item.mainImg}>{item.mainImg}</a>
+                <a href={item.mainImg}><img src={item.mainImg} alt="выбранная картинка"/></a>
               </p>
               <p>
                 <b>

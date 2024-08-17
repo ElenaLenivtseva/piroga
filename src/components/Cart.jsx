@@ -2,42 +2,53 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, cleanCart } from "../features/cartSlice";
 import { addOrderAsync } from "../features/ordersSlice";
-import { nanoid } from "nanoid";
 
 const initial = {
   delivery: false,
-  change: 'noChange',
-  time: 'now',
+  change: "noChange",
+  time: "now",
   date: "",
   phone: "",
   name: "",
   address: "",
   payment: "cash",
   note: "",
-  id: nanoid(),
-  dateOfOrder: dateString()
+  dateOfOrder: dateString(),
 };
-function dateString(){
-  const date = new Date()
-  const months=['Янв', 'Фев', 'Март','Апр','Май','Июнь','Июль','Авг','Сент','Окт','Нояб','Дек']
-  const yearOforder = date.getFullYear()
-  const numberMonth = date.getMonth()
-  const monthOforder = months[numberMonth]
-  const dayOfOrder = date.getDate()
-  const hourOfOrder = date.getHours()
-  const minutesOfOrder = date.getMinutes()
-  return `Заказ сделан в ${hourOfOrder}:${minutesOfOrder} ${dayOfOrder} ${monthOforder} ${yearOforder}`
+function dateString() {
+  const date = new Date();
+  const months = [
+    "Янв",
+    "Фев",
+    "Март",
+    "Апр",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Авг",
+    "Сент",
+    "Окт",
+    "Нояб",
+    "Дек",
+  ];
+  const yearOforder = date.getFullYear();
+  const numberMonth = date.getMonth();
+  const monthOforder = months[numberMonth];
+  const dayOfOrder = date.getDate();
+  const hourOfOrder = date.getHours();
+  const minutesOfOrder = date.getMinutes();
+  return `Заказ сделан в ${hourOfOrder}:${minutesOfOrder} ${dayOfOrder} ${monthOforder} ${yearOforder}`;
 }
+
 const Cart = () => {
   const dispatch = useDispatch();
-  const [form, setForm] = useState(
-    initial
-  );
+  const [form, setForm] = useState(initial);
   const cart = useSelector((state) => state.cart);
- 
-  function handleSubmit(){
-    dispatch(addOrderAsync(form))
-    setForm(initial)
+
+  function handleSubmit() {
+    dispatch(addOrderAsync(form));
+    setForm(initial);
+    dispatch(cleanCart())
   }
   return (
     <div>
@@ -90,7 +101,6 @@ const Cart = () => {
           <input
             type="tel"
             name="tel"
-            id=""
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
           />
@@ -136,10 +146,9 @@ const Cart = () => {
           <input
             type="radio"
             name="time"
-            id=""
-            value='now'
-            checked={form.time==='now'?true:false}
-            onChange={() => setForm({...form, time: true})}
+            value="now"
+            checked={form.time === "now" ? true : false}
+            onChange={() => setForm({ ...form, time: true })}
           />
         </label>
         <label>
@@ -147,24 +156,28 @@ const Cart = () => {
           <input
             type="radio"
             name="time"
-            id=""
-            value='later'
-            checked={form.time==='later'?true:false}
-            onChange={(e) => setForm({...form, time: e.target.value})}
+            value="later"
+            checked={form.time === "later" ? true : false}
+            onChange={(e) => setForm({ ...form, time: e.target.value })}
           />
         </label>
-        {form.time === 'later'? (
+        {form.time === "later" ? (
           <div>
-            Выберете дату <input type="date" value={form.date} onChange={(e)=>setForm({...form,date:e.target.value})}/>
+            Выберете дату{" "}
+            <input
+              type="date"
+              value={form.date}
+              onChange={(e) => setForm({ ...form, date: e.target.value })}
+            />
           </div>
         ) : null}
       </div>
       <div>
         <h3>Оплата</h3>
         <div>
-          <div onClick={()=>setForm({...form, payment: 'cash'})}>
+          <div onClick={() => setForm({ ...form, payment: "cash" })}>
             Наличными при получении
-            {form.delivery &&form.payment==='cash' ? (
+            {form.delivery && form.payment === "cash" ? (
               <div>
                 Надо ли курьеру иметь с собой сдачу?
                 <label>
@@ -172,10 +185,11 @@ const Cart = () => {
                   <input
                     type="radio"
                     name="change"
-                    id=""
-                    value='needChange'
-                    checked={form.change==='needChange'?true:false}
-                    onChange={(e) => setForm({...form, change: e.target.value})}
+                    value="needChange"
+                    checked={form.change === "needChange" ? true : false}
+                    onChange={(e) =>
+                      setForm({ ...form, change: e.target.value })
+                    }
                   />
                 </label>
                 <label>
@@ -183,16 +197,19 @@ const Cart = () => {
                   <input
                     type="radio"
                     name="change"
-                    id=""
-                    value='noChange'
-                    checked={form.change==='noChange'?true:false}
-                    onChange={(e) => setForm({...form, change: e.target.value})}
+                    value="noChange"
+                    checked={form.change === "noChange" ? true : false}
+                    onChange={(e) =>
+                      setForm({ ...form, change: e.target.value })
+                    }
                   />
                 </label>
               </div>
             ) : null}
           </div>
-          <div onClick={()=>setForm({...form, payment: 'card'})}>Картой при получении</div>
+          <div onClick={() => setForm({ ...form, payment: "card" })}>
+            Картой при получении
+          </div>
         </div>
       </div>
       <div>
@@ -203,9 +220,7 @@ const Cart = () => {
         ></textarea>
       </div>
       {/* НАДО ЕЩЕ ВАЛИДАЦИЮ ДЕЛАТЬ! */}
-      <button onClick={() =>
-         handleSubmit()
-        }>Заказать</button>
+      <button onClick={() => handleSubmit()}>Заказать</button>
     </div>
   );
 };
