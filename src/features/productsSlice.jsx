@@ -76,6 +76,7 @@ export const deleteProductsOfCategoryAsync = createAsyncThunk(
 
   async (categoryType) => {
     const url = `http://localhost:3001/products?category=${categoryType}`
+    console.log(url)
     const resp = await fetch(url, {
       method: "DELETE",
     });
