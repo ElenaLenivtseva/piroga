@@ -1,12 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const getCategoriesAsync = createAsyncThunk("orders/getCategories", async () => {
-  const resp = await fetch("http://localhost:3001/categories");
-  if (resp.ok) {
-    const data = await resp.json();
-    return {data};
+export const getCategoriesAsync = createAsyncThunk(
+  "orders/getCategories",
+  async () => {
+    const resp = await fetch("http://localhost:3001/categories");
+    if (resp.ok) {
+      const data = await resp.json();
+      return { data };
+    }
   }
-});
+);
 
 export const addCategoryAsync = createAsyncThunk(
   "orders/addCategory",
@@ -18,7 +21,7 @@ export const addCategoryAsync = createAsyncThunk(
       body: JSON.stringify(category),
     });
     if (resp.ok) {
-      const data = await resp.json()
+      const data = await resp.json();
       return data;
     }
   }
@@ -32,7 +35,7 @@ export const deleteCategoryAsync = createAsyncThunk(
       method: "DELETE",
     });
     if (resp.ok) {
-      const data = await resp.json()
+      const data = await resp.json();
       return data;
     }
   }
@@ -53,7 +56,7 @@ export const categoriesSlice = createSlice({
       })
       .addCase(deleteCategoryAsync.fulfilled, (state, action) => {
         const id = action.payload.id;
-        const filtered = state.filter((e) => e.id !== id)
+        const filtered = state.filter((e) => e.id !== id);
         return filtered;
       });
   },

@@ -16,12 +16,6 @@ const AdminCategories = () => {
   const [add, setAdd] = useState(false);
   const [form, setForm] = useState(initialForm);
 
-  function handleAddCategory() {
-    console.log(form)
-    dispatch(addCategoryAsync(form));
-    setForm(initialForm)
-    setAdd(false)
-}
     
   useEffect(() => {
     dispatch(getCategoriesAsync());
@@ -29,6 +23,28 @@ const AdminCategories = () => {
 
   const categories = useSelector((state) => state.categories);
 
+  function handleAddCategory() {
+    for(let category of categories){
+        if(form.type===category.type){
+            alert('Данная категория уже существует')
+            return
+        }
+    }
+    dispatch(addCategoryAsync(form));
+    setForm(initialForm)
+    setAdd(false)
+}
+
+  
+  function checkType(e){
+    for(let category of categories)
+        if(e.target.value===category.type){
+            alert('Данная категория уже существует')
+        } else {
+            
+        }
+   
+  }
   return (
     <div>
       <h2>Все категории</h2>
@@ -63,7 +79,7 @@ const AdminCategories = () => {
               <h4>Путь в URL EN: {item.type}</h4>
               <h4>Название RU: {item.title}</h4>
               <p>
-                Путь на основное изображение: <br />
+                Ссылка на основное изображение: <br />
                 <a href={item.mainImg}><img src={item.mainImg} alt="выбранная картинка"/></a>
               </p>
               <p>
