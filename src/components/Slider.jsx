@@ -6,7 +6,7 @@ const Slider = () => {
   const dispatch = useDispatch();
 
   const slider = useSelector((state) => state.slider);
-  console.log(slider)
+  
   useEffect(() => {
     dispatch(getSliderAsync());
   }, [dispatch]);
