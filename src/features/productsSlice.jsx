@@ -88,22 +88,6 @@ export const deleteProductAsync = createAsyncThunk(
   }
 );
 
-export const deleteProductsOfCategoryAsync = createAsyncThunk(
-  "products/deleteProductsOfCategory",
-
-  async (categoryType) => {
-    const url = `http://localhost:3001/products?category=${categoryType}`
-    console.log(url)
-    const resp = await fetch(url, {
-      method: "DELETE",
-    });
-    if (resp.ok) {
-      const data = await resp.json();
-      console.log('data', data)
-      return data;
-    }
-  }
-);
 
 export const productsSlice = createSlice({
   name: "products",
@@ -143,12 +127,6 @@ export const productsSlice = createSlice({
       .addCase(deleteProductAsync.fulfilled, (state, action) => {
         const id = action.payload.id;
         const filtered = state.allProducts.filter((e) => e.id !== id);
-        return { ...state, allProducts: filtered };
-      })
-        .addCase(deleteProductsOfCategoryAsync.fulfilled, (state, action) => {
-        const type = action.meta.arg;
-        const filtered = state.allProducts.filter((e) => e.category !== type);
-        console.log(filtered)
         return { ...state, allProducts: filtered };
       })
   },
