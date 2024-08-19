@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteProductAsync } from "../features/productsSlice";
+import { Link } from "react-router-dom";
 
 const ProductAdmin = ({ product }) => {
   const dispatch = useDispatch();
@@ -32,9 +33,13 @@ const ProductAdmin = ({ product }) => {
         <p>{`Цена: ${product.price} руб`}</p>
         <p>{`Вес: ${product.weight} кг`}</p>
         {product.id ? (
+          <>
           <button onClick={() => dispatch(deleteProductAsync(product.id))}>
             Удалить
           </button>
+          
+          <Link to={`/update/${product.id}`}>Редактировать</Link>
+        </>
         ) : null}
       </div>
     </div>

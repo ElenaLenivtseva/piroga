@@ -8,6 +8,7 @@ import Menu from "./components/Menu";
 import CategoryDetail from "./components/CategoryDetail";
 import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
+import Update from "./components/Update";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/categories/:type" element={<CategoryDetail />} />
           <Route path="/:id" element={<SingleProduct />} />
+          <Route path="/update/:id" element={<Update />} />
           {/* <Route path="/account" element={<PageAccount/>} >
                     <Route index element={<PageAccount />} />
                     <Route path=":id" element={<PageAccount />} />
