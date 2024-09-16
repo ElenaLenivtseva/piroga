@@ -6,7 +6,7 @@ import Admin from './components/Admin'
 import Home from "./components/Home";
 import Menu from "./components/Menu/Menu";
 import CategoryDetail from "./components/CategoryDetail";
-import SingleProduct from "./components/SingleProduct";
+import SingleProduct from "./components/SingleProduct/SingleProduct";
 import Cart from "./components/Cart";
 import Update from "./components/Update";
 
