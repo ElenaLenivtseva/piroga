@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ConditionsOfDelivery from "./components/ConditionsOfDelivery";
-import About from "./components/About";
+import ConditionsOfDelivery from "./components/Delivery/ConditionsOfDelivery";
+import About from "./components/About/About";
 import Admin from './components/Admin'
 import Home from "./components/Home";
 import Menu from "./components/Menu/Menu";
