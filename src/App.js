@@ -4,7 +4,7 @@ import ConditionsOfDelivery from "./components/ConditionsOfDelivery";
 import About from "./components/About";
 import Admin from './components/Admin'
 import Home from "./components/Home";
-import Menu from "./components/Menu";
+import Menu from "./components/Menu/Menu";
 import CategoryDetail from "./components/CategoryDetail";
 import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
@@ -24,10 +24,6 @@ function App() {
           <Route path="/categories/:type" element={<CategoryDetail />} />
           <Route path="/:id" element={<SingleProduct />} />
           <Route path="/update/:id" element={<Update />} />
-          {/* <Route path="/account" element={<PageAccount/>} >
-                    <Route index element={<PageAccount />} />
-                    <Route path=":id" element={<PageAccount />} />
-                </Route> */}
         </Routes>
       </BrowserRouter>
     </>

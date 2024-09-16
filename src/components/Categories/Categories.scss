@@ -1,0 +1,13 @@
+@import '../../styles/common';
+
+.categories__title {
+    font-weight: bold;
+    font-size: 2.4rem;
+    color: $black;
+    margin-bottom: 2rem;
+}
+.categories__wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+}

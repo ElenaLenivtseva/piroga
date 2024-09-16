@@ -1,0 +1,17 @@
+@import '../../styles/common';
+
+.slider {
+    padding: 0 7%;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.slider__img-wrap {
+    width: 100%;
+    overflow: hidden;
+}
+.slider__img {
+    max-width: 100%;
+    object-fit: cover;
+}
